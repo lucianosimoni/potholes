@@ -1,5 +1,6 @@
 import {
   GoogleMap,
+  GoogleMapProps,
   useLoadScript,
   Marker,
   InfoWindow,
@@ -10,16 +11,16 @@ import "./Map.css";
 
 function Map({ darkMode }) {
   const [markers, setMarkers] = useState([]);
+  const [center, setCenter] = useState({
+    lat: 51.507351,
+    lng: -0.127758,
+  });
   const [selected, setSelected] = useState(null);
 
   // Map config
   const mapContainerStyle = {
     width: "100%",
     height: "100%",
-  };
-  const center = {
-    lat: 51.507351,
-    lng: -0.127758,
   };
   const options = {
     styles: darkMode === true ? mapStyles.dark : mapStyles.light,
@@ -46,6 +47,7 @@ function Map({ darkMode }) {
 
   return (
     <GoogleMap
+      clickableIcons={false}
       mapContainerStyle={mapContainerStyle}
       zoom={12}
       center={center}

@@ -26,7 +26,7 @@ function App() {
 
           <section className="section-actions">
             <div className="nav-add-report noselect">
-              <span class="material-symbols-outlined">add</span>
+              <span className="material-symbols-outlined">add</span>
             </div>
           </section>
         </nav>
