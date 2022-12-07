@@ -1,0 +1,91 @@
+{
+  "holes": [
+    {
+      "id": 1,
+      "title": "Maple Place big hole",
+      "description": "OMG! no one care for us!",
+      "authorId": 1,
+      "position": { "lat": 51.521991, "lng": -0.137476 }
+    },
+    {
+      "id": 2,
+      "title": "Chenies Street Hole",
+      "description": "Just by my door mate, remove it pls",
+      "authorId": 2,
+      "position": { "lat": 51.520544, "lng": -0.133495 }
+    },
+    {
+      "id": 3,
+      "title": "A Huge hole bro!",
+      "description": "On Plaza Oxford Street",
+      "authorId": 3,
+      "position": { "lat": 51.516443, "lng": -0.136233 }
+    },
+    {
+      "id": 4,
+      "title": "30 Cleveland Street",
+      "description": "It has been here since I was born...",
+      "authorId": 4,
+      "position": { "lat": 51.519806, "lng": -0.137812 }
+    },
+    {
+      "id": 5,
+      "title": "In the middle of the Bridge!",
+      "description": "how",
+      "authorId": 5,
+      "position": { "lat": 51.506447, "lng": -0.172457 }
+    },
+    {
+      "id": 6,
+      "title": "It broke my car!",
+      "description": "In 12 Radnor Place - Urgent!",
+      "authorId": 6,
+      "position": { "lat": 51.515408, "lng": -0.170539 }
+    },
+    {
+      "id": 7,
+      "title": "In front of Tesco",
+      "description": "Bruh, how can you guys leave it like that? almost lost all my groceries",
+      "authorId": 1,
+      "position": { "lat": 51.515566, "lng": -0.163558 }
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "Luciano Simoni",
+      "email": "lucianosimoni@email.com",
+      "reportsId": [1, 7]
+    },
+    {
+      "id": 2,
+      "name": "Barry Noris",
+      "email": "barrynoris@email.com",
+      "reportsId": [2]
+    },
+    {
+      "id": 3,
+      "name": "Wenna Olsson",
+      "email": "olssonwenna@email.com",
+      "reportsId": [3]
+    },
+    {
+      "id": 4,
+      "name": "Camero Pigeon",
+      "email": "pigeon@email.com",
+      "reportsId": [4]
+    },
+    {
+      "id": 5,
+      "name": "Una Batata",
+      "email": "batata_una@email.com",
+      "reportsId": [5]
+    },
+    {
+      "id": 6,
+      "name": "David Wu",
+      "email": "mr.wu.david@email.com",
+      "reportsId": [6]
+    }
+  ]
+}
