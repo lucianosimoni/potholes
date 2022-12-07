@@ -1,0 +1,17 @@
+.info-window {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 200px;
+  font-size: medium;
+}
+.info-title,
+.info-description {
+  margin: 0;
+}
+
+.info-author {
+  align-self: flex-start;
+  font-weight: bold;
+}

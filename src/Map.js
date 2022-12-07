@@ -6,24 +6,28 @@ import {
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import mapStyles from "./mapStyles";
+import "./Map.css";
 
-const mapContainerStyle = {
-  width: "100%",
-  height: "100%",
-};
-const center = {
-  lat: 51.507351,
-  lng: -0.127758,
-};
-const options = {
-  styles: mapStyles,
-  disableDefaultUI: true,
-  zoomControl: true,
-};
-
-function Map() {
+function Map({ darkMode }) {
   const [markers, setMarkers] = useState([]);
+  const [selected, setSelected] = useState(null);
 
+  // Map config
+  const mapContainerStyle = {
+    width: "100%",
+    height: "100%",
+  };
+  const center = {
+    lat: 51.507351,
+    lng: -0.127758,
+  };
+  const options = {
+    styles: darkMode === true ? mapStyles.dark : mapStyles.light,
+    disableDefaultUI: true,
+    zoomControl: true,
+  };
+
+  // Fetch Holes from DB
   useEffect(() => {
     fetch("http://localhost:4000/holes")
       .then((res) => res.json())
@@ -48,8 +52,29 @@ function Map() {
       options={options}
     >
       {markers.map((marker) => {
-        return <Marker key={marker.id} position={marker.position} />;
+        return (
+          <Marker
+            key={marker.id}
+            position={marker.position}
+            onClick={() => {
+              setSelected(marker);
+            }}
+          />
+        );
       })}
+
+      {selected && (
+        <InfoWindow
+          position={selected.position}
+          onCloseClick={() => setSelected(null)}
+        >
+          <div className="info-window">
+            <h3 className="info-title">{selected.title}</h3>
+            <p className="info-description">{selected.description}</p>
+            <span className="info-author">Author: {selected.authorId}</span>
+          </div>
+        </InfoWindow>
+      )}
     </GoogleMap>
   );
 }

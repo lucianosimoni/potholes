@@ -7,8 +7,13 @@
   width: 100%;
 }
 
-/* Navigation */
+.map-wrapper {
+  -webkit-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 20px 0px rgba(0, 0, 0, 0.75);
+}
 
+/* Navigation */
 .nav {
   display: flex;
   flex-direction: column;
@@ -16,18 +21,24 @@
 
   width: 25%;
   position: relative;
+  box-shadow: 0px 0px 30px 5px #14213dab;
+  z-index: 100;
 
-  background-color: #282c34;
+  background-color: #252422;
 }
 .nav-logo {
   height: 80px;
   pointer-events: none;
 }
 .nav-title {
-  margin: 8px 0;
-  color: white;
+  margin: 0;
+  color: #fffcf2;
 }
 .nav-add-report {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   bottom: 0;
   left: 0;
@@ -35,21 +46,71 @@
   cursor: pointer;
 
   margin: 10%;
-  padding: 10%;
   width: 80%; /*Margin & Padding*/
-  height: 100px;
+  height: 65px;
+  color: #fffcf2;
 
-  font-size: 22px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
   border: 0;
   border-radius: 32px;
-  background-color: rgb(78, 255, 137);
+  background-color: #eb5e28;
+
+  transition: ease scale 0.1s;
+}
+.nav-add-report:hover {
+  scale: 1.05;
+}
+
+.nav-add-report span {
+  font-size: 50px;
 }
 
 /* Main Map */
-
 .App-main {
   height: 100%;
   width: 100%;
+  position: relative;
+}
+
+/* Light/Dark Mode Button */
+.light-mode-button,
+.dark-mode-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 8px;
+  margin: 8px;
+
+  background-color: #fffcf270;
+  border-radius: 50%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+  cursor: pointer;
+  transition: ease scale 0.1s, ease background-color 0.1s;
+}
+.light-mode-button:hover,
+.dark-mode-button:hover {
+  scale: 1.05;
+  background-color: #fffcf2;
+}
+.light-mode-button span {
+  font-size: 50px;
+  font-variation-settings: "FILL" 0;
+  transition: ease font-variation-settings 0.1s;
+}
+.dark-mode-button span {
+  font-size: 50px;
+  font-variation-settings: "FILL" 1;
+  transition: ease font-variation-settings 0.1s;
 }
 
 @media (prefers-reduced-motion: no-preference) {
