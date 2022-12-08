@@ -27,28 +27,17 @@ function AddForm({ darkMode, setShowAddForm }) {
   function saveImage(file, imageIndex) {
     getBase64(file)
       .then((resBlob) => {
-        console.log("ResBlob received.");
-
         const newData = [...data];
-        console.log("Spreaded data: ", newData);
-        console.log("first obj in newData: ", newData[0]);
-        console.log("images of this obj: ", newData[0].images);
-        newData[0].images = newData[0].images.map((image, i) => {
-          if (i === imageIndex) {
-            console.log(
-              "Index iterated is same as the imageIndex to be changed"
-            );
+        newData[0].images = newData[0].images.map((image, index) => {
+          if (index === imageIndex) {
             return resBlob;
           } else {
-            console.log("x - other image, just returning it.");
             return image;
           }
         });
-        console.log("newData after map: ", newData);
-
         setData([newData]);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.error(error));
   }
 
   function getBase64(file) {
@@ -56,12 +45,10 @@ function AddForm({ darkMode, setShowAddForm }) {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log("- Result aquired");
-        resolve(reader.result); //kinda like return?
-        // return reader.result;
+        resolve(reader.result);
       };
-      reader.onerror = (error) => reject("Error getting base 64: ", error);
-      //   console.error("Error getting base 64:", error);
+      reader.onerror = (error) =>
+        reject("Error getting base 64 from image: ", error);
     });
   }
 
