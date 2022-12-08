@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./AddForm.css";
+import PreviewImage from "./PreviewImage";
 
 function AddForm({ darkMode, setShowAddForm }) {
   const [animating, setAnimating] = useState("false");
@@ -19,6 +20,10 @@ function AddForm({ darkMode, setShowAddForm }) {
       },
     },
   ]);
+  const [previewImage, setPreviewImage] = useState({
+    viewing: false,
+    imgIndex: null,
+  });
 
   function waitForCloseAnim() {
     setAnimating("true");
@@ -68,6 +73,13 @@ function AddForm({ darkMode, setShowAddForm }) {
     });
   }
 
+  const uploadButtonClassName = darkMode
+    ? "dark-upload upload-image-button noselect"
+    : "light-upload upload-image-button noselect";
+  const previewButtonClassName = darkMode
+    ? "dark-preview-button image-preview-button noselect"
+    : "light-preview-button image-preview-button noselect";
+
   return (
     <div
       className={
@@ -76,7 +88,7 @@ function AddForm({ darkMode, setShowAddForm }) {
       onAnimationEnd={() => setAnimating("false")}
       animating={animating}
     >
-      {/* Loading Screen */}
+      {/* Loading Image Screen */}
       {loadingImage.load && !loadingImage.err ? (
         <div className="loading-screen">
           <h1>Loading image...</h1>
@@ -88,6 +100,14 @@ function AddForm({ darkMode, setShowAddForm }) {
           <button onClick={() => setLoadingImage([false, false])}>Close</button>
         </div>
       ) : null}
+
+      {/* Preview Image call */}
+      {previewImage.viewing && (
+        <PreviewImage
+          imageUrl={data[0].images[previewImage.imgIndex]}
+          setPreviewImage={setPreviewImage}
+        />
+      )}
 
       {/* Close Button */}
       <div
@@ -104,12 +124,13 @@ function AddForm({ darkMode, setShowAddForm }) {
       <form className="form-style">
         <h1>Report a Pothole</h1>
         <section className="section-upload-pictures">
-          <h2>Picture upload</h2>
-          <span>Maximum of 3 images</span>
+          <h2 className="section-upload-header">Picture upload</h2>
+          <span>Take a good picture of the pothole!</span>
+
           <ul className="images-wrapper">
             {/* First Image */}
             <li className="image-item">
-              <label htmlFor="image-upload-1" className="upload-image-button">
+              <label htmlFor="image-upload-1" className={uploadButtonClassName}>
                 <input
                   id="image-upload-1"
                   type="file"
@@ -121,10 +142,22 @@ function AddForm({ darkMode, setShowAddForm }) {
                 />
                 Select an Image
               </label>
+              {/* If image selected */}
+              {data[0].images[0] && (
+                <div
+                  className={previewButtonClassName}
+                  onClick={() =>
+                    setPreviewImage({ viewing: true, imgIndex: 0 })
+                  }
+                >
+                  <span className="material-symbols-outlined">fullscreen</span>
+                  <span>Preview</span>
+                </div>
+              )}
             </li>
             {/* Second Image */}
             <li className="image-item">
-              <label htmlFor="image-upload-2" className="upload-image-button">
+              <label htmlFor="image-upload-2" className={uploadButtonClassName}>
                 <input
                   id="image-upload-2"
                   type="file"
@@ -136,10 +169,22 @@ function AddForm({ darkMode, setShowAddForm }) {
                 />
                 Select an Image
               </label>
+              {/* If image selected */}
+              {data[0].images[1] && (
+                <div
+                  className={previewButtonClassName}
+                  onClick={() =>
+                    setPreviewImage({ viewing: true, imgIndex: 1 })
+                  }
+                >
+                  <span className="material-symbols-outlined">fullscreen</span>
+                  <span>Preview</span>
+                </div>
+              )}
             </li>
             {/* Third Image */}
             <li className="image-item">
-              <label htmlFor="image-upload-3" className="upload-image-button">
+              <label htmlFor="image-upload-3" className={uploadButtonClassName}>
                 <input
                   id="image-upload-3"
                   type="file"
@@ -151,6 +196,18 @@ function AddForm({ darkMode, setShowAddForm }) {
                 />
                 Select an Image
               </label>
+              {/* If image selected */}
+              {data[0].images[2] && (
+                <div
+                  className={previewButtonClassName}
+                  onClick={() =>
+                    setPreviewImage({ viewing: true, imgIndex: 2 })
+                  }
+                >
+                  <span className="material-symbols-outlined">fullscreen</span>
+                  <span>Preview</span>
+                </div>
+              )}
             </li>
           </ul>
         </section>
