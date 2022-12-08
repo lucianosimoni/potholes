@@ -113,7 +113,6 @@
 .section-upload-header {
   margin-bottom: 8px;
 }
-
 /* --- */
 
 /* Images wrapper */
@@ -132,7 +131,6 @@
 input[type="file"] {
   display: none;
 }
-
 .image-item {
   display: flex;
   flex-direction: column;
@@ -175,7 +173,6 @@ input[type="file"] {
 .upload-image-button:hover {
   scale: 1.025;
 }
-
 .image-preview-button {
   display: flex;
   justify-content: center;
@@ -205,8 +202,27 @@ input[type="file"] {
   color: #252422;
   border-color: #252422;
 }
-
 /* --- */
+
+/* Title and Description section */
+.section-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.section-text-header {
+  margin-bottom: 8px;
+}
+.input-title {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 12px;
+}
+.input-description {
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 12px;
+}
 
 @keyframes panelIn {
   from {

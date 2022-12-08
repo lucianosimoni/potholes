@@ -5,7 +5,7 @@ function PreviewImage({ imageUrl, setPreviewImage }) {
   };
 
   return (
-    <div className="preview-image-panel" onClick={closePanel}>
+    <div className="preview-image-panel noselect" onClick={closePanel}>
       <div className="preview-image-dark-panel">
         {/* Close Button */}
         <div className="preview-image-close-button" onClick={closePanel}>

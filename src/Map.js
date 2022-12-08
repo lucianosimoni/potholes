@@ -1,6 +1,5 @@
 import {
   GoogleMap,
-  GoogleMapProps,
   useLoadScript,
   Marker,
   InfoWindow,

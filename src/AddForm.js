@@ -35,15 +35,11 @@ function AddForm({ darkMode, setShowAddForm }) {
   //   Waits for getBase64 promise
   function saveImage(file, imageIndex) {
     setLoadingImage({ load: true, err: false });
-    console.log("File: ", file, "\n\n ImageIndex: ", imageIndex);
 
     getBase64(file)
       .then((resBlob) => {
-        console.log("\nResBlob arrived\n");
         const newData = [...data];
-        console.log("newData: ", newData);
         newData[0].images = newData[0].images.map((image, index) => {
-          console.log("\n- - Looping though index: ", index);
           if (index === imageIndex) {
             return resBlob;
           } else {
@@ -71,6 +67,17 @@ function AddForm({ darkMode, setShowAddForm }) {
       reader.onerror = (error) =>
         reject("Error getting base 64 from image: ", error);
     });
+  }
+
+  function titleChanged(event) {
+    const newData = [...data];
+    newData[0].title = event.target.value;
+    setData([...newData]);
+  }
+  function descriptionChanged(event) {
+    const newData = [...data];
+    newData[0].description = event.target.value;
+    setData([...newData]);
   }
 
   const uploadButtonClassName = darkMode
@@ -210,6 +217,24 @@ function AddForm({ darkMode, setShowAddForm }) {
               )}
             </li>
           </ul>
+        </section>
+
+        <section className="section-text">
+          <h2 className="section-text-header">Title of your Report</h2>
+          <span>Keep it simple</span>
+          <input
+            className="input-title"
+            type="text"
+            onChange={(event) => titleChanged(event)}
+          />
+
+          <h2 className="section-text-header">Description of your Report</h2>
+          <span>How long it've been here etc...</span>
+          <input
+            className="input-description"
+            type="text"
+            onChange={(event) => descriptionChanged(event)}
+          />
         </section>
       </form>
     </div>

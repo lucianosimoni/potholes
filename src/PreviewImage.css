@@ -51,7 +51,7 @@
   background-color: #252422;
   border-radius: 50%;
   box-shadow: rgb(107, 107, 107) 0 0 70px -20px,
-    rgba(133, 63, 45, 0.976) 0px 30px 60px -20px,
+    rgba(100, 100, 100, 0.976) 0px 0 30px -20px,
     rgba(113, 113, 113, 0.179) 0px -2px 6px 0px inset;
 }
 .preview-image-close-button span {
