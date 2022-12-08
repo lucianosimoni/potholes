@@ -8,6 +8,10 @@ import { Helmet, HelmetProvider } from "react-helmet-async";
 function App() {
   const [darkMode, setDarkMode] = useState(true);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [mapClick, setMapClick] = useState({
+    active: false,
+    location: { lat: null, lng: null },
+  });
 
   return (
     <>
@@ -23,7 +27,11 @@ function App() {
 
       <div className="App">
         {showAddForm && (
-          <AddForm darkMode={darkMode} setShowAddForm={setShowAddForm} />
+          <AddForm
+            darkMode={darkMode}
+            setShowAddForm={setShowAddForm}
+            setMapClick={setMapClick}
+          />
         )}
 
         {/* Navigation */}
@@ -43,8 +51,13 @@ function App() {
           </section>
         </nav>
 
+        {/* Map */}
         <main className="App-main">
-          <Map darkMode={darkMode} />
+          <Map
+            darkMode={darkMode}
+            mapClick={mapClick}
+            setMapClick={setMapClick}
+          />
         </main>
 
         {/* Dark Mode Button */}

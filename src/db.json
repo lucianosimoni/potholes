@@ -4,49 +4,49 @@
       "id": 1,
       "title": "Maple Place big hole",
       "description": "OMG! no one care for us!",
-      "authorId": 1,
+      "authorId": "Luciano Simoni",
       "position": { "lat": 51.521991, "lng": -0.137476 }
     },
     {
       "id": 2,
       "title": "Chenies Street Hole",
       "description": "Just by my door mate, remove it pls",
-      "authorId": 2,
+      "authorId": "Barry Noris",
       "position": { "lat": 51.520544, "lng": -0.133495 }
     },
     {
       "id": 3,
       "title": "A Huge hole bro!",
       "description": "On Plaza Oxford Street",
-      "authorId": 3,
+      "authorId": "Wenna Olsson",
       "position": { "lat": 51.516443, "lng": -0.136233 }
     },
     {
       "id": 4,
       "title": "30 Cleveland Street",
       "description": "It has been here since I was born...",
-      "authorId": 4,
+      "authorId": "Camero Pigeon",
       "position": { "lat": 51.519806, "lng": -0.137812 }
     },
     {
       "id": 5,
       "title": "In the middle of the Bridge!",
       "description": "how",
-      "authorId": 5,
+      "authorId": "Una Batata",
       "position": { "lat": 51.506447, "lng": -0.172457 }
     },
     {
       "id": 6,
       "title": "It broke my car!",
       "description": "In 12 Radnor Place - Urgent!",
-      "authorId": 6,
+      "authorId": "David Wu",
       "position": { "lat": 51.515408, "lng": -0.170539 }
     },
     {
       "id": 7,
       "title": "In front of Tesco",
       "description": "Bruh, how can you guys leave it like that? almost lost all my groceries",
-      "authorId": 1,
+      "authorId": "Luciano Simoni",
       "position": { "lat": 51.515566, "lng": -0.163558 }
     }
   ],

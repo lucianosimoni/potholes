@@ -211,6 +211,7 @@ input[type="file"] {
   text-align: left;
 }
 .section-text-header {
+  margin-top: 0;
   margin-bottom: 8px;
 }
 .input-title {
@@ -223,6 +224,19 @@ input[type="file"] {
   padding: 8px;
   border-radius: 12px;
 }
+/* --- */
+
+/* Section Location */
+.section-location {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.section-location-header {
+  margin-bottom: 8px;
+}
+
+/* --- */
 
 @keyframes panelIn {
   from {

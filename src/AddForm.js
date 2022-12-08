@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./AddForm.css";
 import PreviewImage from "./PreviewImage";
 
-function AddForm({ darkMode, setShowAddForm }) {
+function AddForm({ darkMode, setShowAddForm, setMapClick }) {
   const [animating, setAnimating] = useState("false");
   const [loadingImage, setLoadingImage] = useState({
     load: false,
@@ -235,6 +235,14 @@ function AddForm({ darkMode, setShowAddForm }) {
             type="text"
             onChange={(event) => descriptionChanged(event)}
           />
+        </section>
+
+        <section className="section-location">
+          <h2 className="section-location-header">Location</h2>
+          <span>
+            Click on the Map to select precise location, or write the address
+            down bellow.
+          </span>
         </section>
       </form>
     </div>

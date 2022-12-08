@@ -6,9 +6,10 @@ import {
 } from "@react-google-maps/api";
 import { useEffect, useState } from "react";
 import mapStyles from "./mapStyles";
+import PotholeMarker from "../src/marker.svg";
 import "./Map.css";
 
-function Map({ darkMode }) {
+function Map({ darkMode, setMapClick }) {
   const [markers, setMarkers] = useState([]);
   const [center, setCenter] = useState({
     lat: 51.507351,
@@ -57,6 +58,7 @@ function Map({ darkMode }) {
           <Marker
             key={marker.id}
             position={marker.position}
+            options={{ icon: PotholeMarker }}
             onClick={() => {
               setSelected(marker);
             }}
