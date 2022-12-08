@@ -30,18 +30,22 @@ function AddForm({ darkMode, setShowAddForm }) {
   //   Waits for getBase64 promise
   function saveImage(file, imageIndex) {
     setLoadingImage({ load: true, err: false });
+    console.log("File: ", file, "\n\n ImageIndex: ", imageIndex);
 
     getBase64(file)
       .then((resBlob) => {
+        console.log("\nResBlob arrived\n");
         const newData = [...data];
+        console.log("newData: ", newData);
         newData[0].images = newData[0].images.map((image, index) => {
+          console.log("\n- - Looping though index: ", index);
           if (index === imageIndex) {
             return resBlob;
           } else {
             return image;
           }
         });
-        setData([newData]);
+        setData([...newData]);
         setLoadingImage({ load: false, err: false });
       })
       .catch((error) => {
@@ -51,10 +55,12 @@ function AddForm({ darkMode, setShowAddForm }) {
   }
   //   uses Promise
   function getBase64(file) {
+    console.log("Getting base 64 of file");
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
+        console.log("- Base resolved");
         resolve(reader.result);
       };
       reader.onerror = (error) =>
@@ -83,7 +89,7 @@ function AddForm({ darkMode, setShowAddForm }) {
         </div>
       ) : null}
 
-      {/* Close Panel */}
+      {/* Close Button */}
       <div
         className={
           darkMode

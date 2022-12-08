@@ -2,8 +2,8 @@ import Logo from "./logo.js";
 import "./App.css";
 import Map from "./Map";
 import { useState } from "react";
-import { Helmet } from "react-helmet";
 import AddForm from "./AddForm";
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -11,13 +11,15 @@ function App() {
 
   return (
     <>
-      <Helmet>
-        <title>Pothole Report</title>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </Helmet>
+      <HelmetProvider>
+        <Helmet>
+          <title>Pothole Report</title>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+          />
+        </Helmet>
+      </HelmetProvider>
 
       <div className="App">
         {showAddForm && (
