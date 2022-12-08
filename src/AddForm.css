@@ -1,3 +1,35 @@
+/* Loading Screen */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background-color: #2524228a;
+}
+.loading-screen h1 {
+  margin: 0;
+  margin-bottom: 6px;
+}
+.loading-screen button {
+  padding: 8px;
+  margin-top: 24px;
+  width: 100px;
+  font-size: larger;
+  background-color: #eb5e28;
+  border: 0;
+  border-radius: 16px;
+  color: #fffcf2;
+  transition: ease scale 0.1s;
+  cursor: pointer;
+}
+.loading-screen button:hover {
+  scale: 1.1;
+}
+
+/* Form Panel */
 .add-form-panel {
   display: flex;
   flex-direction: column;
@@ -17,11 +49,9 @@
 
   transition: ease background-color 0.5s;
 }
-
 .add-form-panel[animating="true"] {
   animation: panelOut 0.5s ease forwards;
 }
-
 .light-panel {
   background-color: #fffcf2;
   color: #252422;
@@ -30,7 +60,15 @@
   background-color: #403d39;
   color: #fffcf2;
 }
+/* --- */
 
+/* Form Style */
+.form-style {
+  height: 100%;
+}
+/* --- */
+
+/* Close Button */
 .add-form-close {
   display: flex;
   align-items: center;
@@ -57,13 +95,59 @@
 .add-form-close:active {
   filter: brightness(88%);
 }
-
 .dark-close {
   background-color: #252422;
 }
 .light-close {
   background-color: #fffcf2;
 }
+/* --- */
+
+/* Section Upload Pictures */
+.section-upload-pictures {
+  display: flex;
+  flex-direction: column;
+}
+/* --- */
+
+/* Images wrapper */
+.images-wrapper {
+  display: flex;
+  flex-direction: row;
+
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+input[type="file"] {
+  display: none;
+}
+
+.image-item {
+  margin: 8px;
+  height: 60px;
+}
+.upload-image-button {
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  padding: 8px;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 16px;
+  border: 1px solid white;
+  cursor: pointer;
+  transition: ease filter 0.1s;
+}
+.upload-image-button:hover {
+  filter: brightness(92%);
+}
+.upload-image-button:active {
+  filter: brightness(88%);
+}
+/* --- */
 
 @keyframes panelIn {
   from {
