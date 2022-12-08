@@ -21,18 +21,23 @@
 
   width: 25%;
   position: relative;
-  box-shadow: 0px 0px 30px 5px #14213dab;
+  box-shadow: 0px 0px 30px 5px #2524227f;
   z-index: 100;
 
+  transition: ease background-color 0.5s, ease color 0.5s;
+}
+.nav-dark {
   background-color: #252422;
+  color: #fffcf2;
 }
-.nav-logo {
-  height: 80px;
-  pointer-events: none;
+.nav-light {
+  background-color: #fffcf2;
+  color: #252422;
 }
+
 .nav-title {
   margin: 0;
-  color: #fffcf2;
+  color: inherit;
 }
 .nav-add-report {
   display: flex;
@@ -111,19 +116,4 @@
   font-size: 50px;
   font-variation-settings: "FILL" 1;
   transition: ease font-variation-settings 0.1s;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .nav-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

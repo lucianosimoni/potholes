@@ -23,7 +23,7 @@ function Map({ darkMode }) {
     height: "100%",
   };
   const options = {
-    styles: darkMode === true ? mapStyles.dark : mapStyles.light,
+    styles: darkMode ? mapStyles.dark : mapStyles.light,
     disableDefaultUI: true,
     zoomControl: true,
   };

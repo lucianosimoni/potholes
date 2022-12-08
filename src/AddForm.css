@@ -1,0 +1,83 @@
+.add-form-panel {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 200;
+
+  height: 100%;
+  width: 40%;
+
+  box-shadow: 0px 0px 30px 5px #2524227f;
+  border-radius: 0 16px 16px 0;
+  background-color: aqua;
+
+  animation: panelIn 0.5s ease forwards;
+
+  transition: ease background-color 0.5s;
+}
+
+.add-form-panel[animating="true"] {
+  animation: panelOut 0.5s ease forwards;
+}
+
+.light-panel {
+  background-color: #fffcf2;
+  color: #252422;
+}
+.dark-panel {
+  background-color: #403d39;
+  color: #fffcf2;
+}
+
+.add-form-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  padding: 8px;
+  margin: 8px;
+
+  cursor: pointer;
+  color: #eb5e28;
+  background-color: #252422;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, #2524226d 0px -2px 6px 0px inset;
+  border-radius: 50%;
+
+  transition: ease background-color 0.5s, ease filter 0.1s;
+}
+.add-form-close:hover {
+  filter: brightness(92%);
+}
+.add-form-close:active {
+  filter: brightness(88%);
+}
+
+.dark-close {
+  background-color: #252422;
+}
+.light-close {
+  background-color: #fffcf2;
+}
+
+@keyframes panelIn {
+  from {
+    left: -40%;
+  }
+  to {
+    left: 0;
+  }
+}
+@keyframes panelOut {
+  from {
+    left: 0;
+  }
+  to {
+    left: -40%;
+  }
+}

@@ -1,11 +1,13 @@
-import logo from "./logo.svg";
+import Logo from "./logo.js";
 import "./App.css";
 import Map from "./Map";
 import { useState } from "react";
 import { Helmet } from "react-helmet";
+import AddForm from "./AddForm";
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
+  const [showAddForm, setShowAddForm] = useState(false);
 
   return (
     <>
@@ -18,14 +20,22 @@ function App() {
       </Helmet>
 
       <div className="App">
-        <nav className="nav">
+        {showAddForm && (
+          <AddForm darkMode={darkMode} setShowAddForm={setShowAddForm} />
+        )}
+
+        {/* Navigation */}
+        <nav className={darkMode ? "nav-dark nav" : "nav-light nav"}>
           <section className="section-header">
-            <img src={logo} className="nav-logo noselect" alt="logo" />
+            <Logo fill={darkMode ? "#fffcf2" : "#252422"} />
             <h2 className="nav-title">Pothole Report</h2>
           </section>
 
           <section className="section-actions">
-            <div className="nav-add-report noselect">
+            <div
+              className="nav-add-report noselect"
+              onClick={() => setShowAddForm(true)}
+            >
               <span className="material-symbols-outlined">add</span>
             </div>
           </section>
@@ -35,6 +45,7 @@ function App() {
           <Map darkMode={darkMode} />
         </main>
 
+        {/* Dark Mode Button */}
         <div
           className={
             darkMode === true
