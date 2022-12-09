@@ -211,7 +211,6 @@ input[type="file"] {
   text-align: left;
 }
 .section-text-header {
-  margin-top: 0;
   margin-bottom: 8px;
 }
 .input-title {
@@ -234,6 +233,12 @@ input[type="file"] {
 }
 .section-location-header {
   margin-bottom: 8px;
+}
+.section-location-description {
+  margin-bottom: 8px;
+}
+.section-location-position {
+  font-weight: bold;
 }
 
 /* --- */

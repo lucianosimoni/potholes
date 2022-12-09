@@ -30,6 +30,7 @@ function App() {
           <AddForm
             darkMode={darkMode}
             setShowAddForm={setShowAddForm}
+            mapClick={mapClick}
             setMapClick={setMapClick}
           />
         )}

@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AddForm.css";
 import PreviewImage from "./PreviewImage";
 
-function AddForm({ darkMode, setShowAddForm, setMapClick }) {
+function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
   const [animating, setAnimating] = useState("false");
   const [loadingImage, setLoadingImage] = useState({
     load: false,
@@ -25,7 +25,13 @@ function AddForm({ darkMode, setShowAddForm, setMapClick }) {
     imgIndex: null,
   });
 
+  //   At Beggining
+  useEffect(() => {
+    setMapClick({ active: true, location: { lat: null, lng: null } });
+  }, []);
+
   function waitForCloseAnim() {
+    setMapClick({ active: false, location: { lat: null, lng: null } });
     setAnimating("true");
     setTimeout(() => {
       setShowAddForm(false);
@@ -239,9 +245,15 @@ function AddForm({ darkMode, setShowAddForm, setMapClick }) {
 
         <section className="section-location">
           <h2 className="section-location-header">Location</h2>
-          <span>
-            Click on the Map to select precise location, or write the address
-            down bellow.
+          <span className="section-location-description">
+            Click on the Map to select precise location.
+            <br /> - Pink pinpoint
+          </span>
+          <span className="section-location-position">
+            Lat: {mapClick.location.lat}
+          </span>
+          <span className="section-location-position">
+            Lng: {mapClick.location.lng}
           </span>
         </section>
       </form>

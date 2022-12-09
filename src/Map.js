@@ -7,15 +7,21 @@ import {
 import { useEffect, useState } from "react";
 import mapStyles from "./mapStyles";
 import PotholeMarker from "../src/marker.svg";
+import SelectionMarker from "../src/markerSelection.svg";
 import "./Map.css";
 
-function Map({ darkMode, setMapClick }) {
+const center = {
+  lat: 51.507351,
+  lng: -0.127758,
+};
+
+function Map({ darkMode, mapClick, setMapClick }) {
   const [markers, setMarkers] = useState([]);
-  const [center, setCenter] = useState({
-    lat: 51.507351,
-    lng: -0.127758,
-  });
   const [selected, setSelected] = useState(null);
+  const [selectionMarker, setSelectionMarker] = useState({
+    lat: null,
+    lng: null,
+  });
 
   // Map config
   const mapContainerStyle = {
@@ -27,6 +33,22 @@ function Map({ darkMode, setMapClick }) {
     disableDefaultUI: true,
     zoomControl: true,
   };
+
+  // Handle Map click
+  const mapClicked = (event) => {
+    if (mapClick.active) {
+      // setSelectionMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+      setMapClick({
+        active: true,
+        location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
+      });
+    }
+  };
+
+  // Removes selectionPosition if addForm not showing
+  // useEffect(() => {
+  //   setSelectionMarker({ lat: null, lng: null });
+  // }, [mapClick]);
 
   // Fetch Holes from DB
   useEffect(() => {
@@ -52,7 +74,9 @@ function Map({ darkMode, setMapClick }) {
       zoom={12}
       center={center}
       options={options}
+      onClick={(event) => mapClicked(event)}
     >
+      {/* Mapping of Database */}
       {markers.map((marker) => {
         return (
           <Marker
@@ -66,6 +90,16 @@ function Map({ darkMode, setMapClick }) {
         );
       })}
 
+      {/* Selection Marker */}
+      {mapClick.active === true && mapClick.location.lat !== null ? (
+        <Marker
+          position={mapClick.location}
+          options={{ icon: SelectionMarker }}
+          clickable={false}
+        />
+      ) : null}
+
+      {/* Info Box */}
       {selected && (
         <InfoWindow
           position={selected.position}
