@@ -117,3 +117,26 @@
   font-variation-settings: "FILL" 1;
   transition: ease font-variation-settings 0.1s;
 }
+
+.section-buttons {
+  display: flex;
+  flex-direction: column;
+  padding-top: 8px;
+}
+
+.section-buttons-button {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #fffcf2;
+  color: #252422;
+  border-radius: 16px;
+  margin: 8px;
+  padding: 12px;
+  gap: 8px;
+  cursor: pointer;
+  transition: ease scale 0.1s;
+}
+.section-buttons-button:hover {
+  scale: 1.05;
+}

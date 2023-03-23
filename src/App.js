@@ -10,8 +10,9 @@ function App() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [mapClick, setMapClick] = useState({
     active: false,
-    location: { lat: null, lng: null },
+    position: { lat: null, lng: null },
   });
+  const [updateMap, setUpdateMap] = useState(false);
 
   return (
     <>
@@ -32,6 +33,7 @@ function App() {
             setShowAddForm={setShowAddForm}
             mapClick={mapClick}
             setMapClick={setMapClick}
+            setUpdateMap={setUpdateMap}
           />
         )}
 
@@ -40,6 +42,23 @@ function App() {
           <section className="section-header">
             <Logo fill={darkMode ? "#fffcf2" : "#252422"} />
             <h2 className="nav-title">Pothole Report</h2>
+          </section>
+
+          <section className="section-buttons">
+            <div className="section-buttons-button">
+              <span className="material-symbols-outlined">lab_profile</span>
+              Reports
+            </div>
+
+            <div className="section-buttons-button">
+              <span className="material-symbols-outlined">quiz</span>
+              FAQs
+            </div>
+
+            <div className="section-buttons-button">
+              <span className="material-symbols-outlined">info</span>
+              Info
+            </div>
           </section>
 
           <section className="section-actions">
@@ -58,6 +77,8 @@ function App() {
             darkMode={darkMode}
             mapClick={mapClick}
             setMapClick={setMapClick}
+            updateMap={updateMap}
+            setUpdateMap={setUpdateMap}
           />
         </main>
 

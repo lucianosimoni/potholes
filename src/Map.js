@@ -15,7 +15,7 @@ const center = {
   lng: -0.127758,
 };
 
-function Map({ darkMode, mapClick, setMapClick }) {
+function Map({ darkMode, mapClick, setMapClick, updateMap, setUpdateMap }) {
   const [markers, setMarkers] = useState([]);
   const [selected, setSelected] = useState(null);
   const [selectionMarker, setSelectionMarker] = useState({
@@ -37,18 +37,25 @@ function Map({ darkMode, mapClick, setMapClick }) {
   // Handle Map click
   const mapClicked = (event) => {
     if (mapClick.active) {
-      // setSelectionMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
       setMapClick({
         active: true,
-        location: { lat: event.latLng.lat(), lng: event.latLng.lng() },
+        position: { lat: event.latLng.lat(), lng: event.latLng.lng() },
       });
     }
   };
 
-  // Removes selectionPosition if addForm not showing
-  // useEffect(() => {
-  //   setSelectionMarker({ lat: null, lng: null });
-  // }, [mapClick]);
+  // Update the map after new item
+  useEffect(() => {
+    if (updateMap) {
+      fetch("http://localhost:4000/holes")
+        .then((res) => res.json())
+        .then((data) => setMarkers(data))
+        .catch((err) => {
+          console.error("Error while fetching Holes from api: ", err);
+        });
+      setUpdateMap(false);
+    }
+  }, [updateMap]);
 
   // Fetch Holes from DB
   useEffect(() => {
@@ -91,9 +98,9 @@ function Map({ darkMode, mapClick, setMapClick }) {
       })}
 
       {/* Selection Marker */}
-      {mapClick.active === true && mapClick.location.lat !== null ? (
+      {mapClick.active === true && mapClick.position.lat !== null ? (
         <Marker
-          position={mapClick.location}
+          position={mapClick.position}
           options={{ icon: SelectionMarker }}
           clickable={false}
         />
@@ -106,6 +113,7 @@ function Map({ darkMode, mapClick, setMapClick }) {
           onCloseClick={() => setSelected(null)}
         >
           <div className="info-window">
+            <img src={selected.images[1]} alt="location" />
             <h3 className="info-title">{selected.title}</h3>
             <p className="info-description">{selected.description}</p>
             <span className="info-author">Author: {selected.authorId}</span>

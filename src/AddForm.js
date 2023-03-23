@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import "./AddForm.css";
+import FormError from "./FormError";
 import PreviewImage from "./PreviewImage";
 
-function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
+function AddForm({
+  darkMode,
+  setShowAddForm,
+  mapClick,
+  setMapClick,
+  setUpdateMap,
+}) {
   const [animating, setAnimating] = useState("false");
   const [loadingImage, setLoadingImage] = useState({
     load: false,
@@ -10,13 +17,13 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
   });
   const [data, setData] = useState([
     {
-      title: "Test Hole",
+      title: "",
       images: [null, null, null],
-      description: "Test Description",
+      description: "",
       authorId: 1,
-      location: {
-        lat: 0,
-        lng: 0,
+      position: {
+        lat: null,
+        lng: null,
       },
     },
   ]);
@@ -24,14 +31,26 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
     viewing: false,
     imgIndex: null,
   });
+  const [showError, setShowError] = useState({
+    active: false,
+    title: "",
+    msg: "",
+  });
 
   //   At Beggining
   useEffect(() => {
-    setMapClick({ active: true, location: { lat: null, lng: null } });
+    setMapClick({ active: true, position: { lat: null, lng: null } });
   }, []);
 
+  //   On mapClick update, save position to data
+  useEffect(() => {
+    const newData = [...data];
+    newData[0].position = mapClick.position;
+    setData([...newData]);
+  }, [mapClick]);
+
   function waitForCloseAnim() {
-    setMapClick({ active: false, location: { lat: null, lng: null } });
+    setMapClick({ active: false, position: { lat: null, lng: null } });
     setAnimating("true");
     setTimeout(() => {
       setShowAddForm(false);
@@ -62,12 +81,10 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
   }
   //   uses Promise
   function getBase64(file) {
-    console.log("Getting base 64 of file");
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log("- Base resolved");
         resolve(reader.result);
       };
       reader.onerror = (error) =>
@@ -84,6 +101,74 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
     const newData = [...data];
     newData[0].description = event.target.value;
     setData([...newData]);
+  }
+  const handleFormComplete = () => {
+    // Check if data is complete
+    const titleOk = data[0].title !== "";
+    const descriptionOk = data[0].description !== "";
+    const imagesOk =
+      data[0].images[0] !== null ||
+      data[0].images[1] !== null ||
+      data[0].images[2] !== null;
+    const locationOk =
+      data[0].position.lat !== null && data[0].position.lng !== null;
+
+    if (!titleOk) {
+      setShowError({
+        active: true,
+        title: "Insert a Title",
+        msg: "Could be the Name of your Street, or the name the neighbours gave it",
+      });
+      return;
+    } else if (!descriptionOk) {
+      setShowError({
+        active: true,
+        title: "Insert a Description",
+        msg: "Try to write how much time this pothole has been bothering you.",
+      });
+      return;
+    } else if (!imagesOk) {
+      setShowError({
+        active: true,
+        title: "Select an Image",
+        msg: "Submit at least 1 image before continuing",
+      });
+      return;
+    } else if (!locationOk) {
+      setShowError({
+        active: true,
+        title: "Select the Location",
+        msg: "Click on the map where you saw your Pothole. Be precise",
+      });
+      return;
+    }
+
+    // Ok to send
+    sendForm();
+    setLoadingImage({ load: true, err: false });
+  };
+
+  function sendForm() {
+    fetch("http://localhost:4000/holes", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data[0]),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        waitForCloseAnim();
+        setUpdateMap(true);
+        setLoadingImage({ load: false, err: false });
+      })
+      .catch((err) => {
+        setShowError({
+          active: true,
+          title: "Error while sending Report",
+          msg: "Try again with a smaller image",
+        });
+        console.error("Error while posting Holes to api: ", err);
+        setLoadingImage({ load: false, err: false });
+      });
   }
 
   const uploadButtonClassName = darkMode
@@ -104,7 +189,7 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
       {/* Loading Image Screen */}
       {loadingImage.load && !loadingImage.err ? (
         <div className="loading-screen">
-          <h1>Loading image...</h1>
+          <h1>Loading...</h1>
         </div>
       ) : !loadingImage.load && loadingImage.err ? (
         <div className="loading-screen">
@@ -113,6 +198,15 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
           <button onClick={() => setLoadingImage([false, false])}>Close</button>
         </div>
       ) : null}
+
+      {/* Form Error popup */}
+      {showError.active && (
+        <FormError
+          title={showError.title}
+          msg={showError.msg}
+          setShowError={setShowError}
+        />
+      )}
 
       {/* Preview Image call */}
       {previewImage.viewing && (
@@ -134,8 +228,8 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
         <span className="material-symbols-outlined">close</span>
       </div>
 
+      <h1>Report a Pothole</h1>
       <form className="form-style">
-        <h1>Report a Pothole</h1>
         <section className="section-upload-pictures">
           <h2 className="section-upload-header">Picture upload</h2>
           <span>Take a good picture of the pothole!</span>
@@ -250,12 +344,17 @@ function AddForm({ darkMode, setShowAddForm, mapClick, setMapClick }) {
             <br /> - Pink pinpoint
           </span>
           <span className="section-location-position">
-            Lat: {mapClick.location.lat}
+            Lat: {mapClick.position.lat}
           </span>
           <span className="section-location-position">
-            Lng: {mapClick.location.lng}
+            Lng: {mapClick.position.lng}
           </span>
         </section>
+
+        <div className="send-form-button noselect" onClick={handleFormComplete}>
+          <span className="material-symbols-outlined">check</span>
+          Send Report
+        </div>
       </form>
     </div>
   );
